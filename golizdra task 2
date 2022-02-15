@@ -1,0 +1,39 @@
+//голиздра владислав таск 2 вариант 7
+#include <iostream>
+#include <cmath>
+ 
+ 
+using namespace std;
+void dectopol()
+{
+ double x, y;
+ cout << "введите координаты" <<endl;
+ cout << "x:" <<endl;
+ cin >> x;
+ cout << "y:" <<endl;
+ cin >>y;
+ double r = sqrt(pow(x,2) + pow(y,2));
+ double fi = (atan(y / x));
+ cout << "fi = " << fi << " r =" << r << endl;
+}
+ 
+void poltodec()
+{
+ double r, fi;
+ cout << "введите угол" << endl;
+ cin >> fi;
+ cout << "введите радиус" << endl;
+ cin >> r;
+ double x = r * cos(fi);
+ double y = r * sin(fi);
+    cout << "x =" << x << endl << "y =" << y << endl;
+}
+ 
+int main()
+{
+    setlocale(LC_ALL, "Rus");
+    cout << "Из декардовой в полярные\n";
+    dectopol();
+    cout << "Из полярной в декардовую\n";
+    poltodec();
+}
