@@ -1,0 +1,88 @@
+//голиздра таск 7 вариант 7
+#include <iostream>
+#include <string>
+#include <fstream>
+ 
+using namespace std;
+bool  IsTemplate(string s1, string s2)
+{
+    int count = 0;
+    int sizezv = 0;
+    for (size_t i = 0; i < s2.length(); i++)
+        if (s2[i] == '*')
+            count++;
+    if (count != 0) {
+        for (size_t i = 0; i <= s2.length(); i++)
+            if (count * i + s2.length() == s1.length())
+                sizezv = count * i;
+        if (sizezv == 0)
+            return false;
+    }
+    if (count == 0 && s1.length() != s2.length())
+        return false;
+    string zn = "";
+    char symbol = '?';
+    int i = 0, j = 0;
+    while (i < s1.length() && j < s2.length())
+    {
+        if (s2[j] == '?')
+        {
+            if (symbol == '?')
+                symbol = s1[i];
+            else if (s1[i] != symbol)
+                return false;
+        }
+        else if (s2[j] == '*')
+        {
+            int count = 0;
+            while (sizezv > count)
+            {
+                if (zn.empty())
+                    zn += s1[i];
+                else
+                {
+                    if (s1[i] != zn[count])
+                    {
+                        return false;
+                    }
+                }
+                i++;
+                count++;
+            }
+        }
+        else if (s1[i] != s2[j])
+        {
+            return false;
+        }
+        i++; j++;
+    }
+    return true;
+}
+void chtenie(string path)
+{
+    string s1,s2;
+ 
+    ifstream in(path); 
+    if (in.is_open())
+    {
+        while (!in.eof())
+        {
+            in >> s1 >> s2;
+            cout << s1 << endl;
+            cout << s2 << endl;
+            cout << IsTemplate(s1, s2) << endl;
+        }
+    }
+    in.close();    
+}
+ 
+int main()
+{
+    setlocale(LC_ALL, "Rus");
+    chtenie("input.txt");
+    cout << "Введите свой пример";
+    string s1, s2;
+    cin >> s1;
+    cin >> s2;
+    IsTemplate(s1, s2);
+}
